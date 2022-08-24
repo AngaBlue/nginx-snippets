@@ -1,7 +1,9 @@
 # NGINX Snippets
 A collection of NGINX snippets designed to be used for hosting multiple Node.js servers.
 
-I use these settings behind Cloudflare to provide Full (strict) end-to-end encryption.  Using a Cloudflare Origin CA certificate is the easiest way to accomplish this, although this certificate is not trusted by clients; meaning you must use a different certificate issued by CA in order to server traffic that does not pass through Cloudflare.
+I use these settings behind Cloudflare to provide Full (strict) end-to-end encryption.  Using a Cloudflare Origin CA certificate is the easiest way to accomplish this, although this certificate is not trusted by clients; meaning you must use a different certificate issued by CA (such as [Let's Encrypt](https://letsencrypt.org/)) in order to server traffic that does not pass through Cloudflare.
+
+For other NGINX setups, [Digital Ocean's NGINXConfig tool](https://www.digitalocean.com/community/tools/nginx) is a great place to start.
 
 ## Configuration files
 
@@ -22,6 +24,8 @@ ___Note:__ these headers include HSTS, meaning if you don't plan to support HTTP
 
 ### ssl.conf `/etc/nginx/sites-enabled/ssl.conf`
 Force all HTTP connections to retry via HTTPS.  Subsequently, all other NGINX server blocks should listen on port 443.
+
+By default, a certificate at `/etc/ssl/certs/certificate.pem` with a key at `/etc/ssl/private/certificate.key` are used.  These names and locations can of course be changed.
 
 ### timeout.conf `/etc/nginx/conf.d/timeout.conf`
 Configures various request and response timeouts to be 30 seconds.
