@@ -1,6 +1,8 @@
 # NGINX Snippets
 A collection of NGINX snippets designed to be used for hosting multiple Node.js servers.
 
+I use these settings behind Cloudflare to provide Full (strict) end-to-end encryption.  Using a Cloudflare Origin CA certificate is the easiest way to accomplish this, although this certificate is not trusted by clients; meaning you must use a different certificate issued by CA in order to server traffic that does not pass through Cloudflare.
+
 ## Configuration files
 
 ### nginx.conf `/etc/nginx/nginx.conf`
@@ -12,6 +14,11 @@ Base server settings that:
 
 ### headers.conf `/etc/nginx/conf.d/headers.conf`
 Adds general security headers to all requests.
+* Restrictive CORS & permissions policy
+* iFrame blocking
+* Tracking blocking
+
+___Note:__ these headers include HSTS, meaning if you don't plan to support HTTPS on all hosted sites now and into the future, you must remove this header._
 
 ### ssl.conf `/etc/nginx/sites-enabled/ssl.conf`
 Force all HTTP connections to retry via HTTPS.  Subsequently, all other NGINX server blocks should listen on port 443.
