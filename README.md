@@ -27,6 +27,13 @@ Force all HTTP connections to retry via HTTPS.  Subsequently, all other NGINX se
 
 By default, a certificate at `/etc/ssl/certs/certificate.pem` with a key at `/etc/ssl/private/certificate.key` are used.  These names and locations can of course be changed.
 
+If multiple certificates are needed for various domains, the default certificate can be overridden inside a server block using the following snippet.
+
+```
+ssl_certificate /etc/ssl/certs/other-cert.pem;
+ssl_certificate_key /etc/ssl/private/other-cert.key;
+```
+
 ### timeout.conf `/etc/nginx/conf.d/timeout.conf`
 Configures various request and response timeouts to be 30 seconds.
 
